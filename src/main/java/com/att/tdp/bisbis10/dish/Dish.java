@@ -8,8 +8,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Dish {
@@ -21,13 +19,45 @@ public class Dish {
     @JsonBackReference
     private Restaurant restaurant;
 
-    @NotNull
     private String name;
 
-    @NotNull
     private String description;
 
-    @NotNull
-    @Min(value = 0)
     private float price;
+
+    public Long getId() {
+        return id;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
 }
