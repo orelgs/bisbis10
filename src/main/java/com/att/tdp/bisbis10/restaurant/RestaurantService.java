@@ -6,4 +6,6 @@ public interface RestaurantService {
     List<Restaurant> getAllRestaurants();
 
     List<Restaurant> getAllRestaurantsByCuisine(String cuisine);
+
+    Restaurant getRestaurantById(long id);
 }

@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.att.tdp.bisbis10.exception.RestaurantNotFoundException;
+
 @Service
 public class RestaurantServiceImpl implements RestaurantService {
     @Autowired
@@ -18,5 +20,11 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Override
     public List<Restaurant> getAllRestaurantsByCuisine(String cuisine) {
         return restaurantRepository.findAllByCuisinesContaining(cuisine);
+    }
+
+    @Override
+    public Restaurant getRestaurantById(long id) {
+        return restaurantRepository.findById(id)
+                                   .orElseThrow(() -> new RestaurantNotFoundException(id));
     }
 }
