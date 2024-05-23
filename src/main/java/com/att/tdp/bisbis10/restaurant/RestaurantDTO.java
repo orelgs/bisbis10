@@ -11,7 +11,7 @@ public class RestaurantDTO {
     private String name;
 
     @NotNull(message = "isKosher is required")
-    private boolean isKosher;
+    private Boolean isKosher;
 
     @NotEmpty(message = "cuisines is required and must contain at least 1 cuisine")
     private Set<@NotBlank(message = "Cuisine name cannot be blank") String> cuisines;

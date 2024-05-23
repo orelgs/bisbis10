@@ -47,7 +47,7 @@ public class Restaurant {
         this.averageRating = averageRating;
     }
 
-    public boolean isKosher() {
+    public boolean getIsKosher() {
         return isKosher;
     }
 
