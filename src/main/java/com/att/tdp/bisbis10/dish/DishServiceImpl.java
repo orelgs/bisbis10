@@ -80,4 +80,18 @@ public class DishServiceImpl implements DishService {
 
         dishRepository.save(dish);
     }
+
+    @Override
+    public void deleteDishByRestaurantIdAndDishId(long restaurantId, long dishId) {
+        Restaurant restaurant = restaurantRepository.findById(restaurantId)
+                                                    .orElseThrow(() -> new RestaurantNotFoundException(restaurantId));
+        Dish dish = dishRepository.findById(dishId)
+                                  .orElseThrow(() -> new DishNotFoundException(dishId, restaurantId));
+
+        if (dish.getRestaurant() != restaurant) {
+            throw new DishNotFoundException(dishId, restaurantId);
+        }
+
+        dishRepository.delete(dish);
+    }
 }

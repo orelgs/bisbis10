@@ -10,4 +10,6 @@ public interface DishService {
     void addDishByRestaurantId(long restaurantId, @Valid DishDTO dishDTO);
 
     void updateDishByRestaurantIdAndDishId(long restaurantId, long dishId, DishDTO dishDTO);
+
+    void deleteDishByRestaurantIdAndDishId(long restaurantId, long dishId);
 }
