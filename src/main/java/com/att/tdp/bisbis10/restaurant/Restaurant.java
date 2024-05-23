@@ -3,6 +3,8 @@ package com.att.tdp.bisbis10.restaurant;
 import java.util.List;
 import java.util.Set;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import com.att.tdp.bisbis10.dish.Dish;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -65,5 +67,15 @@ public class Restaurant {
 
     public List<Dish> getDishes() {
         return dishes;
+    }
+
+    public static Restaurant getRestaurantFromDTO(RestaurantDTO restaurantDTO) {
+        Restaurant restaurant = new Restaurant();
+
+        restaurant.setName(restaurantDTO.getName());
+        restaurant.setKosher(restaurantDTO.isKosher());
+        restaurant.setCuisines(restaurantDTO.getCuisines());
+
+        return restaurant;
     }
 }

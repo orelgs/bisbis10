@@ -32,11 +32,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public void addRestaurant(RestaurantDTO restaurantDTO) {
-        Restaurant restaurant = new Restaurant();
-
-        restaurant.setName(restaurantDTO.getName());
-        restaurant.setKosher(restaurantDTO.isKosher());
-        restaurant.setCuisines(restaurantDTO.getCuisines());
+        Restaurant restaurant = Restaurant.getRestaurantFromDTO(restaurantDTO);
 
         restaurantRepository.save(restaurant);
     }
@@ -46,6 +42,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     public void updateRestaurantById(long id, RestaurantDTO restaurantDTO) {
         Restaurant restaurant = restaurantRepository.findById(id)
                                                     .orElseThrow(() -> new RestaurantNotFoundException(id));
+
 
         if (restaurantDTO.getName() != null && !restaurantDTO.getName().isBlank()) {
             restaurant.setName(restaurantDTO.getName());
