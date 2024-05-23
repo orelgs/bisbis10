@@ -82,6 +82,7 @@ public class DishServiceImpl implements DishService {
     }
 
     @Override
+    @Transactional
     public void deleteDishByRestaurantIdAndDishId(long restaurantId, long dishId) {
         Restaurant restaurant = restaurantRepository.findById(restaurantId)
                                                     .orElseThrow(() -> new RestaurantNotFoundException(restaurantId));
