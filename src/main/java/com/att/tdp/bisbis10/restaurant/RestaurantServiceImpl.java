@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.att.tdp.bisbis10.exception.RestaurantNotFoundException;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class RestaurantServiceImpl implements RestaurantService {
     @Autowired
@@ -40,6 +42,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
+    @Transactional
     public void updateRestaurantById(long id, RestaurantDTO restaurantDTO) {
         Restaurant restaurant = restaurantRepository.findById(id)
                                                     .orElseThrow(() -> new RestaurantNotFoundException(id));
@@ -68,5 +71,14 @@ public class RestaurantServiceImpl implements RestaurantService {
         }
 
         restaurantRepository.save(restaurant);
+    }
+
+    @Override
+    @Transactional
+    public void deleteRestaurantById(long id) {
+        Restaurant restaurant = restaurantRepository.findById(id)
+                                                    .orElseThrow(() -> new RestaurantNotFoundException(id));
+
+        restaurantRepository.delete(restaurant);
     }
 }
