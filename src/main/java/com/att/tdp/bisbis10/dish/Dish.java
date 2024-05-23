@@ -60,4 +60,14 @@ public class Dish {
     public void setPrice(float price) {
         this.price = price;
     }
+
+    public static Dish createDishFromDTO(DishDTO dishDTO) {
+        Dish dish = new Dish();
+
+        dish.setName(dishDTO.getName());
+        dish.setDescription(dishDTO.getDescription());
+        dish.setPrice(dishDTO.getPrice());
+
+        return dish;
+    }
 }

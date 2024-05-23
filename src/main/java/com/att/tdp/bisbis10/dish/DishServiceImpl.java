@@ -10,6 +10,8 @@ import com.att.tdp.bisbis10.exception.RestaurantNotFoundException;
 import com.att.tdp.bisbis10.restaurant.Restaurant;
 import com.att.tdp.bisbis10.restaurant.RestaurantRepository;
 
+import jakarta.validation.Valid;
+
 @Service
 public class DishServiceImpl implements DishService {
     @Autowired
@@ -25,6 +27,17 @@ public class DishServiceImpl implements DishService {
                                                     .orElseThrow(() -> new RestaurantNotFoundException(restaurantId));
 
         return dishRepository.findAllDishesByRestaurant(restaurant);
+    }
+
+    @Override
+    @Transactional
+    public void addDishByRestaurantId(long restaurantId, @Valid DishDTO dishDTO) {
+        Restaurant restaurant = restaurantRepository.findById(restaurantId)
+                                                    .orElseThrow(() -> new RestaurantNotFoundException(restaurantId));
+        Dish dish = Dish.createDishFromDTO(dishDTO);
+
+        dish.setRestaurant(restaurant);
+        dishRepository.save(dish);
     }
 
 }

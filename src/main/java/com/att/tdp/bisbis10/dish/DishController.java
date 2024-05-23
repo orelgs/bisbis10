@@ -7,8 +7,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/restaurants/{id}/dishes")
@@ -21,5 +25,12 @@ public class DishController {
         List<Dish> dishes = dishService.getAllDishesByRestaurantId(restaurantId);
 
         return new ResponseEntity<>(dishes, HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<Void> addDishByRestaurantId(@PathVariable("id") long restaurantId, @Valid @RequestBody DishDTO dishDTO) {
+        dishService.addDishByRestaurantId(restaurantId, dishDTO);
+
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }
