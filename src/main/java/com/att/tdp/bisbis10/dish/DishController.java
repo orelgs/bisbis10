@@ -17,7 +17,7 @@ public class DishController {
     private DishService dishService;
 
     @GetMapping
-    public ResponseEntity<List<Dish>> getAllDishesByRestaurantId(@PathVariable("id") final long restaurantId) {
+    public ResponseEntity<List<Dish>> getAllDishesByRestaurantId(@PathVariable("id") long restaurantId) {
         List<Dish> dishes = dishService.getAllDishesByRestaurantId(restaurantId);
 
         return new ResponseEntity<>(dishes, HttpStatus.OK);

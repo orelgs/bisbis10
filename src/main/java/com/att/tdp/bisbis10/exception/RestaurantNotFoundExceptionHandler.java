@@ -11,7 +11,7 @@ public class RestaurantNotFoundExceptionHandler {
     @ResponseBody
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(RestaurantNotFoundException.class)
-    public ErrorItem handleRestaurantNotFoundException(final RestaurantNotFoundException exception) {
+    public ErrorItem handleRestaurantNotFoundException(RestaurantNotFoundException exception) {
         return new ErrorItem(exception.getMessage());
     }
 }

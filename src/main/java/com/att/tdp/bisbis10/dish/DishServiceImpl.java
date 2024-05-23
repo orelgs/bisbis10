@@ -20,7 +20,7 @@ public class DishServiceImpl implements DishService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Dish> getAllDishesByRestaurantId(final long restaurantId) {
+    public List<Dish> getAllDishesByRestaurantId(long restaurantId) {
         Restaurant restaurant = restaurantRepository.findById(restaurantId)
                                                     .orElseThrow(() -> new RestaurantNotFoundException(restaurantId));
 

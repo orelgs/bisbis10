@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.att.tdp.bisbis10.restaurant.Restaurant;
 
 public interface DishRepository extends JpaRepository<Dish, Long> {
-    List<Dish> findAllDishesByRestaurant(final Restaurant restaurant);
+    List<Dish> findAllDishesByRestaurant(Restaurant restaurant);
 }
