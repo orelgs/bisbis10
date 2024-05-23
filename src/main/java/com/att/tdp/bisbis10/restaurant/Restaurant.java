@@ -3,8 +3,6 @@ package com.att.tdp.bisbis10.restaurant;
 import java.util.List;
 import java.util.Set;
 
-import org.hibernate.annotations.DynamicUpdate;
-
 import com.att.tdp.bisbis10.dish.Dish;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
