@@ -2,6 +2,7 @@ package com.att.tdp.bisbis10.rating;
 
 import com.att.tdp.bisbis10.restaurant.Restaurant;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,6 +13,7 @@ import jakarta.persistence.ManyToOne;
 @Entity
 public class Rating {
     @Id
+    @JsonIgnore
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

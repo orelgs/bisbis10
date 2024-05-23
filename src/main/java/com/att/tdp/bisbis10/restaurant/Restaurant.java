@@ -5,6 +5,7 @@ import java.util.Set;
 
 import com.att.tdp.bisbis10.dish.Dish;
 import com.att.tdp.bisbis10.rating.Rating;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.*;
@@ -30,6 +31,7 @@ public class Restaurant {
 
     @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
     @JsonManagedReference
+    @JsonIgnore
     private List<Rating> ratings;
 
     public Long getId() {
@@ -48,8 +50,18 @@ public class Restaurant {
         return averageRating;
     }
 
-    public void setAverageRating(float averageRating) {
-        this.averageRating = averageRating;
+    public void updateAverageRating() {
+        if (ratings.isEmpty()) {
+            averageRating = 0;
+        } else {
+            float sum = 0;
+
+            for (Rating rating : ratings) {
+                sum += rating.getRating();
+            }
+
+            averageRating = sum / ratings.size();
+        }
     }
 
     public boolean getIsKosher() {
