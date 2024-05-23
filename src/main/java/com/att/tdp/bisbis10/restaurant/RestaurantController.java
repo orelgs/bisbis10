@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -16,9 +17,15 @@ public class RestaurantController {
     private RestaurantService restaurantService;
 
     @GetMapping
-    public ResponseEntity<List<Restaurant>> getAllRestaurants() {
-        List<Restaurant> allRestaurants = restaurantService.getAllRestaurants();
+    public ResponseEntity<List<Restaurant>> getAllRestaurants(@RequestParam(required = false) String cuisine) {
+        List<Restaurant> restaurants;
+        
+        if (cuisine == null) {
+            restaurants = restaurantService.getAllRestaurants();
+        } else {
+            restaurants = restaurantService.getAllRestaurantsByCuisine(cuisine);
+        }
 
-        return new ResponseEntity<>(allRestaurants, HttpStatus.OK);
+        return new ResponseEntity<>(restaurants, HttpStatus.OK);
     }
 }
