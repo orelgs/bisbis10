@@ -8,4 +8,6 @@ public interface DishService {
     List<Dish> getAllDishesByRestaurantId(long restaurantId);
 
     void addDishByRestaurantId(long restaurantId, @Valid DishDTO dishDTO);
+
+    void updateDishByRestaurantIdAndDishId(long restaurantId, long dishId, DishDTO dishDTO);
 }

@@ -5,15 +5,15 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public class DishDTO {
-    @NotBlank
+    @NotBlank(message = "name is required and cannot be blank")
     private String name;
 
-    @NotBlank
+    @NotBlank(message = "description is required and cannot be blank")
     private String description;
 
-    @NotNull
-    @Min(value = 0)
-    private float price;
+    @NotNull(message = "price is required")
+    @Min(value = 0, message = "price must be at least 0")
+    private Float price;
 
     public String getName() {
         return name;
@@ -23,7 +23,7 @@ public class DishDTO {
         return description;
     }
 
-    public float getPrice() {
+    public Float getPrice() {
         return price;
     }
 }
