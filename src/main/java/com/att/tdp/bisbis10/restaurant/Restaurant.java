@@ -27,6 +27,10 @@ public class Restaurant {
     @JsonManagedReference
     private List<Dish> dishes;
 
+    public Long getId() {
+        return id;
+    }
+
     public String getName() {
         return name;
     }
