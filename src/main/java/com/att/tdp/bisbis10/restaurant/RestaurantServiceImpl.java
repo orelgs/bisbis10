@@ -27,4 +27,15 @@ public class RestaurantServiceImpl implements RestaurantService {
         return restaurantRepository.findById(id)
                                    .orElseThrow(() -> new RestaurantNotFoundException(id));
     }
+
+    @Override
+    public void addRestaurant(RestaurantDTO restaurantDTO) {
+        Restaurant restaurant = new Restaurant();
+
+        restaurant.setName(restaurantDTO.getName());
+        restaurant.setKosher(restaurantDTO.isKosher());
+        restaurant.setCuisines(restaurantDTO.getCuisines());
+
+        restaurantRepository.save(restaurant);
+    }
 }
