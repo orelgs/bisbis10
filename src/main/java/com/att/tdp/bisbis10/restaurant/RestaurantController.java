@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,7 +23,7 @@ public class RestaurantController {
     private RestaurantService restaurantService;
 
     @GetMapping
-    public ResponseEntity<List<Restaurant>> getAllRestaurants(@RequestParam(required = false) final String cuisine) {
+    public ResponseEntity<List<Restaurant>> getAllRestaurants(@RequestParam(required = false) String cuisine) {
         List<Restaurant> restaurants;
         
         if (cuisine == null) {
@@ -34,17 +35,24 @@ public class RestaurantController {
         return new ResponseEntity<>(restaurants, HttpStatus.OK);
     }
 
+    @PostMapping
+    public ResponseEntity<Void> addRestaurant(@Valid @RequestBody RestaurantDTO restaurantDTO) {
+        restaurantService.addRestaurant(restaurantDTO);
+
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
     @GetMapping("/{id}")
-    public ResponseEntity<Restaurant> getRestaurantById(@PathVariable final long id) {
+    public ResponseEntity<Restaurant> getRestaurantById(@PathVariable long id) {
         Restaurant restaurant = restaurantService.getRestaurantById(id);
 
         return new ResponseEntity<>(restaurant, HttpStatus.OK);
     }
 
-    @PostMapping
-    public ResponseEntity<Void> addRestaurant(@Valid @RequestBody final RestaurantDTO restaurantDTO) {
-        restaurantService.addRestaurant(restaurantDTO);
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> updateRestaurantById(@PathVariable long id, @RequestBody RestaurantDTO restaurantDTO) {
+        restaurantService.updateRestaurantById(id, restaurantDTO);
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

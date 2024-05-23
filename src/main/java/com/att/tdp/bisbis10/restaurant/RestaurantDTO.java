@@ -20,7 +20,7 @@ public class RestaurantDTO {
         return name;
     }
 
-    public boolean isKosher() {
+    public Boolean isKosher() {
         return isKosher;
     }
 

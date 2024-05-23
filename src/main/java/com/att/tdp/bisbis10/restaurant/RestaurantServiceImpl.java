@@ -38,4 +38,35 @@ public class RestaurantServiceImpl implements RestaurantService {
 
         restaurantRepository.save(restaurant);
     }
+
+    @Override
+    public void updateRestaurantById(long id, RestaurantDTO restaurantDTO) {
+        Restaurant restaurant = restaurantRepository.findById(id)
+                                                    .orElseThrow(() -> new RestaurantNotFoundException(id));
+
+        if (restaurantDTO.getName() != null && !restaurantDTO.getName().isBlank()) {
+            restaurant.setName(restaurantDTO.getName());
+        }
+
+        if (restaurantDTO.isKosher() != null) {
+            restaurant.setKosher(restaurantDTO.isKosher());
+        }
+
+        if (restaurantDTO.getCuisines() != null && !restaurantDTO.getCuisines().isEmpty()) {
+            boolean isValid = true;
+
+            for (String cuisine : restaurantDTO.getCuisines()) {
+                if (cuisine.isBlank()) {
+                    isValid = false;
+                    break;
+                }
+            }
+
+            if (isValid) {
+                restaurant.setCuisines(restaurantDTO.getCuisines());
+            }
+        }
+
+        restaurantRepository.save(restaurant);
+    }
 }
