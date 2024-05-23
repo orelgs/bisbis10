@@ -69,7 +69,7 @@ public class Restaurant {
         return dishes;
     }
 
-    public static Restaurant getRestaurantFromDTO(RestaurantDTO restaurantDTO) {
+    public static Restaurant createRestaurantFromDTO(RestaurantDTO restaurantDTO) {
         Restaurant restaurant = new Restaurant();
 
         restaurant.setName(restaurantDTO.getName());

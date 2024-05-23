@@ -32,7 +32,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public void addRestaurant(RestaurantDTO restaurantDTO) {
-        Restaurant restaurant = Restaurant.getRestaurantFromDTO(restaurantDTO);
+        Restaurant restaurant = Restaurant.createRestaurantFromDTO(restaurantDTO);
 
         restaurantRepository.save(restaurant);
     }
