@@ -2,6 +2,8 @@ package com.att.tdp.bisbis10.restaurant;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -11,6 +13,7 @@ public class RestaurantDTO {
     private String name;
 
     @NotNull(message = "isKosher is required")
+    @JsonProperty(value = "isKosher")
     private Boolean isKosher;
 
     @NotEmpty(message = "cuisines is required and must contain at least 1 cuisine")

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.att.tdp.bisbis10.dish.Dish;
+import com.att.tdp.bisbis10.order.Order;
 import com.att.tdp.bisbis10.rating.Rating;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -33,6 +34,11 @@ public class Restaurant {
     @JsonManagedReference
     @JsonIgnore
     private List<Rating> ratings;
+
+    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @JsonIgnore
+    private List<Order> orders;
 
     public Long getId() {
         return id;

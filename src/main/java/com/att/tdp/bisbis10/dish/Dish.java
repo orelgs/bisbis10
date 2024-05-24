@@ -1,13 +1,20 @@
 package com.att.tdp.bisbis10.dish;
 
+import java.util.List;
+
+import com.att.tdp.bisbis10.order.OrderItem;
 import com.att.tdp.bisbis10.restaurant.Restaurant;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Dish {
@@ -24,6 +31,11 @@ public class Dish {
     private String description;
 
     private float price;
+
+    @OneToMany(mappedBy = "dish", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @JsonIgnore
+    private List<OrderItem> orderItems;
 
     public Long getId() {
         return id;
