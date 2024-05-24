@@ -48,6 +48,6 @@ public class DishController {
     public ResponseEntity<Void> deleteDishByRestaurantIdAndDishId(@PathVariable("id") long restaurantId, @PathVariable long dishId) {
         dishService.deleteDishByRestaurantIdAndDishId(restaurantId, dishId);
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
