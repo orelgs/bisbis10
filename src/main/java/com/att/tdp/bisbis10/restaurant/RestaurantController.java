@@ -24,8 +24,8 @@ public class RestaurantController {
     private RestaurantService restaurantService;
 
     @GetMapping
-    public ResponseEntity<List<Restaurant>> getAllRestaurants(@RequestParam(required = false) String cuisine) {
-        List<Restaurant> restaurants;
+    public ResponseEntity<List<RestaurantNoDishesProjection>> getAllRestaurants(@RequestParam(required = false) String cuisine) {
+        List<RestaurantNoDishesProjection> restaurants;
         
         if (cuisine == null) {
             restaurants = restaurantService.getAllRestaurants();

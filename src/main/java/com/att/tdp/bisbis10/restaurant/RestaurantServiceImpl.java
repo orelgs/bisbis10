@@ -16,13 +16,13 @@ public class RestaurantServiceImpl implements RestaurantService {
     private RestaurantRepository restaurantRepository;
 
     @Override
-    public List<Restaurant> getAllRestaurants() {
-        return restaurantRepository.findAll();
+    public List<RestaurantNoDishesProjection> getAllRestaurants() {
+        return restaurantRepository.findAllProjectedBy();
     }
 
     @Override
-    public List<Restaurant> getAllRestaurantsByCuisine(String cuisine) {
-        return restaurantRepository.findAllByCuisinesContaining(cuisine);
+    public List<RestaurantNoDishesProjection> getAllRestaurantsByCuisine(String cuisine) {
+        return restaurantRepository.findAllProjectedByCuisinesContaining(cuisine);
     }
 
     @Override

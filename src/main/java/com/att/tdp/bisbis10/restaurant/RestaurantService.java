@@ -3,9 +3,9 @@ package com.att.tdp.bisbis10.restaurant;
 import java.util.List;
 
 public interface RestaurantService {
-    List<Restaurant> getAllRestaurants();
+    List<RestaurantNoDishesProjection> getAllRestaurants();
 
-    List<Restaurant> getAllRestaurantsByCuisine(String cuisine);
+    List<RestaurantNoDishesProjection> getAllRestaurantsByCuisine(String cuisine);
 
     Restaurant getRestaurantById(long id);
 
