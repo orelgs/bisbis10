@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.att.tdp.bisbis10.validator.PartialUpdateValidator;
+
 import jakarta.validation.Valid;
 
 @RestController
@@ -22,6 +25,9 @@ import jakarta.validation.Valid;
 public class RestaurantController {
     @Autowired
     private RestaurantService restaurantService;
+
+    @Autowired
+    private PartialUpdateValidator validator;
 
     @GetMapping
     public ResponseEntity<List<RestaurantNoDishesProjection>> getAllRestaurants(@RequestParam(required = false) String cuisine) {
@@ -51,7 +57,9 @@ public class RestaurantController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateRestaurantById(@PathVariable long id, @RequestBody RestaurantDTO restaurantDTO) {
+    public ResponseEntity<Void> updateRestaurantById(@PathVariable long id, @Valid @RequestBody RestaurantDTO restaurantDTO, 
+                                                     BindingResult bindingResult) {
+        validator.validate(restaurantDTO, bindingResult);
         restaurantService.updateRestaurantById(id, restaurantDTO);
 
         return new ResponseEntity<>(HttpStatus.OK);

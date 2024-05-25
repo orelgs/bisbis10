@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.att.tdp.bisbis10.exception.PartialUpdateValueNotValidException;
 import com.att.tdp.bisbis10.exception.RestaurantNotFoundException;
 
 import jakarta.transaction.Transactional;
@@ -46,10 +45,6 @@ public class RestaurantServiceImpl implements RestaurantService {
 
 
         if (restaurantDTO.getName() != null) {
-            if (restaurantDTO.getName().isBlank()) {
-                throw new PartialUpdateValueNotValidException("name cannot be blank");
-            }
-
             restaurant.setName(restaurantDTO.getName());
         }
 
@@ -58,16 +53,6 @@ public class RestaurantServiceImpl implements RestaurantService {
         }
 
         if (restaurantDTO.getCuisines() != null) {
-            if (restaurantDTO.getCuisines().isEmpty()) {
-                throw new PartialUpdateValueNotValidException("cuisines must contain at least 1 cuisine");
-            }
-
-            for (String cuisine : restaurantDTO.getCuisines()) {
-                if (cuisine.isBlank()) {
-                    throw new PartialUpdateValueNotValidException("Cuisine name cannot be blank");
-                }
-            }
-
             restaurant.setCuisines(restaurantDTO.getCuisines());
         }
 
