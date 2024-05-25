@@ -1,7 +1,6 @@
 package com.att.tdp.bisbis10.order;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import com.att.tdp.bisbis10.restaurant.Restaurant;
 import com.att.tdp.bisbis10.restaurant.RestaurantRepository;
 
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 
 @Service
 public class OrderServiceImpl implements OrderService {
